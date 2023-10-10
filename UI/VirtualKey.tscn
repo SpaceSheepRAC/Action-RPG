@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/ButtonA.png" type="Texture" id=1]
+[ext_resource path="res://UI/ButtonB.png" type="Texture" id=2]
+[ext_resource path="res://UI/VirtualKey.gd" type="Script" id=3]
+
+[node name="VirtualKey" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="ButtonA" type="TouchScreenButton" parent="."]
+position = Vector2( 248, 136 )
+normal = ExtResource( 1 )
+visibility_mode = 1
+
+[node name="ButtonB" type="TouchScreenButton" parent="."]
+position = Vector2( 280, 112 )
+normal = ExtResource( 2 )
+visibility_mode = 1
+
+[connection signal="pressed" from="ButtonA" to="." method="_on_ButtonA_pressed"]
+[connection signal="released" from="ButtonA" to="." method="_on_ButtonA_released"]
+[connection signal="pressed" from="ButtonB" to="." method="_on_ButtonB_pressed"]
+[connection signal="released" from="ButtonB" to="." method="_on_ButtonB_released"]

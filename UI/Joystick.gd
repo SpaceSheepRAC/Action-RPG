@@ -5,6 +5,8 @@ onready var button = $Button
 var maxLen = 96
 var ondraging = -1
 
+signal position_changed(joystick_position)
+
 func _input(event):
 	if (event is InputEventScreenDrag) || ((event is InputEventScreenTouch) && event.is_pressed()):
 		
@@ -16,11 +18,10 @@ func _input(event):
 			
 			if button.position.length() > maxLen:
 				button.position = button.position.normalized() * maxLen
+		emit_signal("position_changed",button.position.normalized())
 		
 	elif (event is InputEventScreenTouch) && !event.is_pressed():
 		if event.get_index() == ondraging:
 			button.position = Vector2.ZERO
+			emit_signal("position_changed", Vector2.ZERO)
 			ondraging = -1
-
-func get_joystick_position():
-	return button.position.normalized()

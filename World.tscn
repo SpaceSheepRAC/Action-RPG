@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://World/Tree.tscn" type="PackedScene" id=10]
 [ext_resource path="res://UI/Joystick.tscn" type="PackedScene" id=11]
-[ext_resource path="res://World.gd" type="Script" id=12]
 [ext_resource path="res://UI/VirtualKey.tscn" type="PackedScene" id=13]
 
 [sub_resource type="TileSet" id=1]
@@ -489,7 +488,6 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/z_index = 0
 
 [node name="World" type="Node2D"]
-script = ExtResource( 12 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -532,19 +530,6 @@ position = Vector2( 136, 136 )
 
 [node name="RemoteTransform2D2" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="YSort/Player"]
-
-[node name="Joystick" parent="YSort/Player/CanvasLayer" instance=ExtResource( 11 )]
-position = Vector2( 64, 136 )
-
-[node name="HealthUI" parent="YSort/Player/CanvasLayer" instance=ExtResource( 9 )]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 64.0
-margin_bottom = 15.0
-
-[node name="VirtualKey" parent="YSort/Player/CanvasLayer" instance=ExtResource( 13 )]
 
 [node name="Bushs" type="YSort" parent="YSort"]
 
@@ -841,3 +826,18 @@ position = Vector2( 720, 176 )
 
 [node name="Bat3" parent="YSort/Bat" instance=ExtResource( 7 )]
 position = Vector2( 376, 264 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Joystick" parent="CanvasLayer" instance=ExtResource( 11 )]
+position = Vector2( 64, 136 )
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 9 )]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 64.0
+margin_bottom = 15.0
+
+[node name="VirtualKey" parent="CanvasLayer" instance=ExtResource( 13 )]
+
+[connection signal="position_changed" from="CanvasLayer/Joystick" to="YSort/Player" method="_on_Joystick_position_changed"]

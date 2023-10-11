@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var joystick = $YSort/Player/CanvasLayer/Joystick
+onready var joystick = $CanvasLayer/Joystick
 
 func _ready():
 	joystick.visible = false

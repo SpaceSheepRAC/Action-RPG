@@ -18,6 +18,7 @@ var velocity = Vector2.ZERO
 var roll_vector = Vector2.RIGHT
 var stats = PlayerStats
 var input_vector = Vector2.ZERO
+var joystick_vector = Vector2.ZERO
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
@@ -26,7 +27,6 @@ onready var swordCollisionShape2D = $Position2D/SwordHitBox/CollisionShape2D
 onready var swordHitBox = $Position2D/SwordHitBox
 onready var hurtBox = $HurtBox
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
-onready var joystick = $CanvasLayer/Joystick
 
 func _ready():
 	stats.connect("no_health", self, "queue_free")
@@ -44,9 +44,7 @@ func _physics_process(delta):
 			attack_state(delta)
 
 func move_state(delta):
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	input_vector = joystick.get_joystick_position()
+	set_input_vector()
 	input_vector = input_vector.normalized()
 	
 	if input_vector != Vector2.ZERO:
@@ -72,6 +70,13 @@ func move_state(delta):
 
 func move():
 	velocity = move_and_slide(velocity)
+
+func set_input_vector():
+	if joystick_vector == Vector2.ZERO:
+		input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+		input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	else:
+		input_vector = joystick_vector
 
 func roll_state(delta):
 	velocity = roll_vector * ROLL_SPEED
@@ -101,3 +106,6 @@ func _on_HurtBox_invincibility_started():
 
 func _on_HurtBox_invincibility_ended():
 	blinkAnimationPlayer.play("Stop")
+	
+func _on_Joystick_position_changed(joystick_position):
+	joystick_vector = joystick_position

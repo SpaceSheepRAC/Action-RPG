@@ -17,11 +17,12 @@ offset = Vector2( -8, -8 )
 
 [node name="HurtBox" parent="." instance=ExtResource( 3 )]
 collision_layer = 8
-show_effect = false
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2( 8, 8 )
 shape = SubResource( 1 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 

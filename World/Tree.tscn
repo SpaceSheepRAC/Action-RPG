@@ -20,3 +20,5 @@ texture = ExtResource( 2 )
 position = Vector2( 0, -1 )
 rotation = 1.5708
 shape = SubResource( 1 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]

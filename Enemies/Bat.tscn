@@ -129,7 +129,7 @@ material = SubResource( 12 )
 position = Vector2( 0, -12 )
 frames = SubResource( 6 )
 animation = "Fly"
-frame = 1
+frame = 4
 playing = true
 
 [node name="ShadowSprite" type="Sprite" parent="."]
@@ -173,6 +173,8 @@ shape = SubResource( 11 )
 anims/RESET = SubResource( 14 )
 anims/Start = SubResource( 13 )
 anims/Stop = SubResource( 15 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="invincibility_ended" from="HurtBox" to="." method="_on_HurtBox_invincibility_ended"]

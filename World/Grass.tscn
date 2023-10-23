@@ -23,6 +23,7 @@ position = Vector2( 8, 8 )
 shape = SubResource( 1 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 8, 8 )
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 

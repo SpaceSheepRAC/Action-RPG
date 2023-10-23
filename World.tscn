@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -8,10 +8,8 @@
 [ext_resource path="res://World/Grass.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Enemies/Bat.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Player/Camera2D.gd" type="Script" id=8]
-[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=9]
 [ext_resource path="res://World/Tree.tscn" type="PackedScene" id=10]
-[ext_resource path="res://UI/Joystick.tscn" type="PackedScene" id=11]
-[ext_resource path="res://UI/VirtualKey.tscn" type="PackedScene" id=13]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -827,17 +825,8 @@ position = Vector2( 720, 176 )
 [node name="Bat3" parent="YSort/Bat" instance=ExtResource( 7 )]
 position = Vector2( 376, 264 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Joystick" parent="CanvasLayer" instance=ExtResource( 11 )]
-position = Vector2( 64, 136 )
-
-[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 9 )]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 64.0
-margin_bottom = 15.0
-
-[node name="VirtualKey" parent="CanvasLayer" instance=ExtResource( 13 )]
+[node name="CanvasLayer" parent="." instance=ExtResource( 9 )]
 
 [connection signal="position_changed" from="CanvasLayer/Joystick" to="YSort/Player" method="_on_Joystick_position_changed"]
+
+[editable path="CanvasLayer"]
